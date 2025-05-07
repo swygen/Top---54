@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup - TopUpBuzz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .logo {
+      margin-bottom: 20px;
+    }
+    .logo img {
+      width: 160px;
+    }
+    .form-container {
+      background: #1c2833;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      width: 90%;
+      max-width: 400px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 10px;
+      background: #2e3b4e;
+      color: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00b894;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00cec9;
+    }
+    .google-btn {
+      background: #fff;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .google-btn img {
+      width: 20px;
+      margin-right: 10px;
+    }
+    .footer {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .footer a {
+      color: #81ecec;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo">
+  <img src="https://i.postimg.cc/Nfwb9bnw/1710850894.jpg" alt="TopUpBuzz Logo">
+</div>
+
+<div class="form-container">
+  <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+  <button class="google-btn" onclick="googleLogin()">
+    <img src="https://img.icons8.com/color/48/000000/google-logo.png"/> Login with Google
+  </button>
+  <hr>
+  <input type="text" id="name" placeholder="Name" required/>
+  <input type="tel" id="phone" placeholder="Phone" pattern="^[0-9]{10}$" required/>
+  <input type="email" id="email" placeholder="Email" required/>
+  <input type="password" id="password" placeholder="Password" required minlength="6"/>
+  <input type="password" id="confirmPassword" placeholder="Confirm Password" required/>
+  <button onclick="signUp()">Register</button>
+  <div class="footer">
+    Already have an account? <a href="login.html">Login Now</a>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDey-3LIZkTe-Zuh2uRgYSVZhVFZ1NgFRo",
+    authDomain: "top-up-bd-5e476.firebaseapp.com",
+    projectId: "top-up-bd-5e476",
+    storageBucket: "top-up-bd-5e476.firebasestorage.app",
+    messagingSenderId: "341516515243",
+    appId: "1:341516515243:web:a04b71c96cfca5b3dc84ee",
+    measurementId: "G-Q2519PDQH2"
+  };
+  
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  window.signUp = function () {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirm = document.getElementById("confirmPassword").value;
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+
+    if (password !== confirm) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    // Check if email and phone are valid (basic validation)
+    if (!email || !phone) {
+      alert("Please fill in all fields correctly.");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        localStorage.setItem("userLoggedIn", "true");
+        window.location.href = "index.html";
+      })
+      .catch((error) => {
+        alert("Signup Failed: " + error.message);
+      });
+  };
+
+  window.googleLogin = function () {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        localStorage.setItem("userLoggedIn", "true");
+        window.location.href = "index.html";
+      })
+      .catch((error) => {
+        alert("Google Login Failed: " + error.message);
+      });
+  };
+</script>
+</body>
+</html>
