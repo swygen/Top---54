@@ -6,6 +6,35 @@
   <title>TopUpBuzz - Premium</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDey-3LIZkTe-Zuh2uRgYSVZhVFZ1NgFRo",
+    authDomain: "top-up-bd-5e476.firebaseapp.com",
+    projectId: "top-up-bd-5e476",
+    storageBucket: "top-up-bd-5e476.firebasestorage.app",
+    messagingSenderId: "341516515243",
+    appId: "1:341516515243:web:a04b71c96cfca5b3dc84ee",
+    measurementId: "G-Q2519PDQH2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // যদি লগইন না করে, সব লিঙ্ক ডিজেবল করে দাও
+      document.querySelectorAll('.card a').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          alert("Please login to access this feature.");
+        });
+      });
+    }
+  });
+  </script>
   <style>
     * {
       margin: 0;
