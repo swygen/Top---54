@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TopUpBuzz - Premium</title>
+  <title>TopUpBuzz - থেকে ডায়মন্ড টপ আপ করুন কম দামে এবং সবচেয়ে দ্রুত !</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script type="module">
@@ -205,7 +205,7 @@
     <img src="https://i.postimg.cc/Nfwb9bnw/1710850894.jpg" alt="Logo">
     <a href="signup.html" class="login-btn">Login</a>
   </header>
-  <div class="notice">নোটিশ: এই সাইট শুধুমাত্র টপআপ এবং সোসাল সার্ভিস এর জন্য।</div>
+  <div class="notice">নোটিশ: এই সাইট শুধুমাত্র টপআপ এবং স্যোশাল সার্ভিস এর জন্য।</div>
   <br>
   <div class="slider">
     <img src="https://i.postimg.cc/hGq7M39S/1744960785.jpg" class="active" alt="Slide 1">
@@ -287,3 +287,165 @@
 
 </footer>
 <!-- End: Premium Footer Section -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Live Chat Button -->
+<div id="supportx-chat-button">
+  <img src="https://i.postimg.cc/HkYqFSL9/telegram.png" alt="Chat with us" />
+</div>
+
+<!-- Message Box (Not a pop-up, but inline message) -->
+<div id="supportx-message-box" class="supportx-hidden">
+  <div class="supportx-content">
+    <div class="supportx-header">
+      <span class="material-icons">help</span>
+      <p>If You Need Any Help Please Contact US</p>
+    </div>
+    <div class="supportx-buttons">
+      <button id="supportx-yes">Yes</button>
+      <button id="supportx-no">No</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f4f4f9;
+  }
+
+  /* Fixed chat button */
+  #supportx-chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    cursor: pointer;
+  }
+
+  #supportx-chat-button img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #supportx-chat-button img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Message Box styles (NOT A POP-UP) */
+  #supportx-message-box {
+    display: none;
+    position: fixed;
+    bottom: 120px;
+    right: 30px;
+    z-index: 9998;
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 350px;
+    text-align: center;
+    box-sizing: border-box;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .supportx-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .supportx-header .material-icons {
+    font-size: 48px;
+    color: #0072ff;
+    margin-right: 10px;
+  }
+
+  .supportx-header p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .supportx-buttons button {
+    margin: 15px 10px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #supportx-yes {
+    background-color: #0088cc;
+    color: white;
+  }
+
+  #supportx-yes:hover {
+    background-color: #0073b1;
+    transform: translateY(-3px);
+  }
+
+  #supportx-no {
+    background-color: #ddd;
+    color: #444;
+  }
+
+  #supportx-no:hover {
+    background-color: #bbb;
+    transform: translateY(-3px);
+  }
+
+  /* Slide-in Animation */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Elements
+  const chatBtn = document.getElementById("supportx-chat-button");
+  const messageBox = document.getElementById("supportx-message-box");
+  const yesBtn = document.getElementById("supportx-yes");
+  const noBtn = document.getElementById("supportx-no");
+
+  // Show message box when chat button is clicked
+  chatBtn.addEventListener("click", () => {
+    messageBox.style.display = "block"; // Show message box near the bottom of the screen
+  });
+
+  // Close message box when 'No' button is clicked
+  noBtn.addEventListener("click", () => {
+    messageBox.style.display = "none";
+  });
+
+  // Redirect to Telegram with a message when 'Yes' button is clicked
+  yesBtn.addEventListener("click", () => {
+    window.open("https://t.me/SuportX_team_24?text=Hi!%20SupportXteam%20I%20need%20help", "_blank");
+    messageBox.style.display = "none";
+  });
+
+  // Optional: Close message box if clicked outside of the box
+  window.addEventListener("click", (e) => {
+    if (e.target === messageBox) {
+      messageBox.style.display = "none";
+    }
+  });
+</script>
