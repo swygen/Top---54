@@ -263,6 +263,16 @@
       return;
     }
 
+    // পূর্বের নির্বাচিত প্যাকেজের 'selected' ক্লাসটি সরান
+    const previousSelected = document.querySelector('.package-card.selected');
+    if (previousSelected) {
+      previousSelected.classList.remove('selected');
+    }
+
+    // নতুন প্যাকেজের 'selected' ক্লাস যোগ করুন
+    const selectedCard = event.currentTarget;
+    selectedCard.classList.add('selected');
+
     selectedAmount = amount;
     selectedDiamonds = packageName;
 
@@ -274,26 +284,28 @@
     // UI তে দেখানো
     selectionSummary.innerText = `আপনি ${uid} আইডিতে ${selectedDiamonds} প্যাকেজ সিলেক্ট করেছেন যার দাম ${amount} টাকা।`;
   }
-function goToPayment(method) {
-  const uid = sessionStorage.getItem('userUID');
-  const amount = sessionStorage.getItem('topupAmount');
-  const packageName = sessionStorage.getItem('selectedDiamonds');
 
-  if (!uid || !amount || !packageName) {
-    alert("দয়া করে UID লিখুন ও প্যাকেজ সিলেক্ট করুন।");
-    return;
+  function goToPayment(method) {
+    const uid = sessionStorage.getItem('userUID');
+    const amount = sessionStorage.getItem('topupAmount');
+    const packageName = sessionStorage.getItem('selectedDiamonds');
+
+    // UID, প্যাকেজ বা এমাউন্ট না থাকলে পেমেন্ট পেজে যাওয়া যাবে না
+    if (!uid || !amount || !packageName) {
+      alert("দয়া করে UID লিখুন ও প্যাকেজ সিলেক্ট করুন।");
+      return; // পেমেন্ট পেজে যাওয়ার আগে চেক করে ফেরত দিন
+    }
+
+    // localStorage-এ এমাউন্ট সেভ করা
+    localStorage.setItem('selectedAmount', amount);
+
+    // পেমেন্ট পেজে পাঠানো
+    if (method === "bkash") {
+      window.location.href = "bkash.html";
+    } else if (method === "nagad") {
+      window.location.href = "nagad.html";
+    }
   }
-
-  // localStorage-এ এমাউন্ট সেভ করা
-  localStorage.setItem('selectedAmount', amount);
-
-  // পেমেন্ট পেজে পাঠানো
-  if (method === "bkash") {
-    window.location.href = "bkash.html";
-  } else if (method === "nagad") {
-    window.location.href = "nagad.html";
-  }
-}
 </script>
   
 </body>
