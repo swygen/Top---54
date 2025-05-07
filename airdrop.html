@@ -1,0 +1,482 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TopUpBuzz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #1a1a2e, #16213e);
+      color: #fff;
+    }
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 25px;
+      background: #0f0f0f;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+    .logo {
+      height: 60px;
+    }
+    .user-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+    }
+    .user-status button {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    main {
+      padding: 30px 20px;
+    }
+    h2.section-title {
+      margin-bottom: 10px;
+      font-size: 26px;
+      border-left: 6px solid #00c6ff;
+      padding-left: 12px;
+    }
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    @media screen and (max-width: 768px) {
+      .package-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media screen and (max-width: 500px) {
+      .package-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    .package-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      font-size: 13px;
+      transition: transform 0.3s ease;
+    }
+    .package-card:hover {
+      transform: scale(1.05);
+    }
+    .package-card h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .package-card p {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .package-card button {
+      padding: 6px 12px;
+      background: #00c6ff;
+      border: none;
+      border-radius: 30px;
+      color: #000;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .uid-input {
+      margin: 30px 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .uid-input input {
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+    .logo-section {
+      display: flex;
+      justify-content: space-around;
+      margin: 40px 0 20px 0;
+    }
+    .logo-section img {
+      height: 50px;
+      filter: drop-shadow(0 3px 4px black);
+    }
+    .payment-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .payment-options button {
+      background: linear-gradient(to right, #ff8a00, #e52e71);
+      padding: 16px;
+      border: none;
+      font-size: 16px;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #000;
+      color: #bbb;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>  
+
+       <div style="text-align: center; margin: 30px 0;">
+       <img src="https://i.postimg.cc/G2LqV05L/1735123177.jpg" alt="FF UID" style="height: 90px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.5);" />
+       <p style="margin-top: 10px; font-size: 18px; font-weight: 600; color: #00ffee;">Airdrop ( id Code ) </p>
+       </div>
+       <main>
+    <h2 class="section-title">1. প্যাকেজ সিলেক্ট করুন</h2>
+<div class="package-grid">
+  <div class="package-card" onclick="handlePackageSelect(140, '0.99$ ( 90 BDT ) Airdrop')">
+    <h3>0.99$ ( 90BDT ) Airdrop </h3>
+    <p>৳140 TK</p>
+    <button>Select</button>
+  </div>
+  <br>
+  <div class="package-card" onclick="handlePackageSelect(280, '1.99$ ( 280 BDT ) Airdrop ')">
+    <h3>1.99$ ( 280 BDT ) Airdrop </h3>
+    <p>৳280 TK</p>
+    <button>Select</button>
+  </div>
+  
+</div>
+    <div class="uid-input">
+  <label for="uid">Free Fire UID লিখুন:</label>
+  <input type="text" id="uid" placeholder="UID লিখুন" />
+</div>
+<!-- Add inside <main> before the payment section -->
+<div id="selectionSummary" style="margin: 20px 0; font-size: 16px; font-weight: 600; color: #00ffcc;"></div>
+<h2 class="section-title">2. পেমেন্ট মাধ্যম সিলেক্ট করুন</h2>
+<div class="logo-section">
+  <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(2).png" alt="Nagad" />
+  <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(3).png" alt="bKash" />
+</div>
+
+<div class="payment-options">
+  <button onclick="goToPayment('nagad')">Pay with Nagad</button>
+  <button onclick="goToPayment('bkash')">Pay with bKash</button>
+</div>
+<script>
+  let selectedAmount = 0;
+  let selectedDiamonds = "";
+  const selectionSummary = document.getElementById("selectionSummary");
+
+  function handlePackageSelect(amount, packageName) {
+    const uid = document.getElementById("uid").value.trim();
+    if (!uid) {
+      alert("UID দিন আগে");
+      return;
+    }
+
+    // পূর্বের নির্বাচিত প্যাকেজের 'selected' ক্লাসটি সরান
+    const previousSelected = document.querySelector('.package-card.selected');
+    if (previousSelected) {
+      previousSelected.classList.remove('selected');
+    }
+
+    // নতুন প্যাকেজের 'selected' ক্লাস যোগ করুন
+    const selectedCard = event.currentTarget;
+    selectedCard.classList.add('selected');
+
+    selectedAmount = amount;
+    selectedDiamonds = packageName;
+
+    // sessionStorage এ সংরক্ষণ
+    sessionStorage.setItem('topupAmount', amount);
+    sessionStorage.setItem('userUID', uid);
+    sessionStorage.setItem('selectedDiamonds', packageName);
+
+    // UI তে দেখানো
+    selectionSummary.innerText = `আপনি ${uid} আইডিতে ${selectedDiamonds} প্যাকেজ সিলেক্ট করেছেন যার দাম ${amount} টাকা।`;
+  }
+
+  function goToPayment(method) {
+    const uid = sessionStorage.getItem('userUID');
+    const amount = sessionStorage.getItem('topupAmount');
+    const packageName = sessionStorage.getItem('selectedDiamonds');
+
+    // UID, প্যাকেজ বা এমাউন্ট না থাকলে পেমেন্ট পেজে যাওয়া যাবে না
+    if (!uid || !amount || !packageName) {
+      alert("দয়া করে UID লিখুন ও প্যাকেজ সিলেক্ট করুন।");
+      return; // পেমেন্ট পেজে যাওয়ার আগে চেক করে ফেরত দিন
+    }
+
+    // localStorage-এ এমাউন্ট সেভ করা
+    localStorage.setItem('selectedAmount', amount);
+
+    // পেমেন্ট পেজে পাঠানো
+    if (method === "bkash") {
+      window.location.href = "bkash.html";
+    } else if (method === "nagad") {
+      window.location.href = "nagad.html";
+    }
+  }
+</script>
+  
+</body>
+</html>
+<!DOCTYPE html><html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopUp Buzz - Rules & Conditions</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 700px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(15px);
+        }
+        .card h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #F9A826;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .card p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+        .icon {
+            color: #F9A826;
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        .footer {
+            background: #111927;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(15px);
+        }
+        .footer a {
+            color: #F9A826;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>⚖️ Rules & Conditions</h2>
+        <p><span class="material-icons-round icon">verified_user</span> শুধুমাত্র Bangladesh সার্ভারে ID Code দিয়ে টপ আপ হবে</p>
+        <p><span class="material-icons-round icon">error_outline</span> Player ID ভুল দিলে Diamond না পেলে TopUp Buzz কর্তৃপক্ষ দায়ী নয়</p>
+        <p><span class="material-icons-round icon">vpn_key</span> Order কমপ্লিট হওয়ার পরেও আইটেম ডাইমন্ড না গেলে চেক করার জন্য ID Pass দিতে হবে</p>
+        <p><span class="material-icons-round icon">cancel</span> অর্ডার Cancel হলে কি কারণে তা Cancel হয়েছে তা অর্ডার হিস্টোরিতে দেওয়া থাকে, পুনরায় সঠিক তথ্য দিয়ে অর্ডার করবেন</p>
+    </div>
+    <div class="footer">
+        <p><h2>🕒 8AM - 12.00PM | <a href="#">Telegram HelpLine</a></p></h2>
+    </div>
+</body>
+</html>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Live Chat Button -->
+<div id="supportx-chat-button">
+  <img src="https://i.postimg.cc/HkYqFSL9/telegram.png" alt="Chat with us" />
+</div>
+
+<!-- Message Box (Not a pop-up, but inline message) -->
+<div id="supportx-message-box" class="supportx-hidden">
+  <div class="supportx-content">
+    <div class="supportx-header">
+      <span class="material-icons">help</span>
+      <p>If You Need Any Help Please Contact US</p>
+    </div>
+    <div class="supportx-buttons">
+      <button id="supportx-yes">Yes</button>
+      <button id="supportx-no">No</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f4f4f9;
+  }
+
+  /* Fixed chat button */
+  #supportx-chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    cursor: pointer;
+  }
+
+  #supportx-chat-button img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #supportx-chat-button img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Message Box styles (NOT A POP-UP) */
+  #supportx-message-box {
+    display: none;
+    position: fixed;
+    bottom: 120px;
+    right: 30px;
+    z-index: 9998;
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 350px;
+    text-align: center;
+    box-sizing: border-box;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .supportx-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .supportx-header .material-icons {
+    font-size: 48px;
+    color: #0072ff;
+    margin-right: 10px;
+  }
+
+  .supportx-header p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .supportx-buttons button {
+    margin: 15px 10px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #supportx-yes {
+    background-color: #0088cc;
+    color: white;
+  }
+
+  #supportx-yes:hover {
+    background-color: #0073b1;
+    transform: translateY(-3px);
+  }
+
+  #supportx-no {
+    background-color: #ddd;
+    color: #444;
+  }
+
+  #supportx-no:hover {
+    background-color: #bbb;
+    transform: translateY(-3px);
+  }
+
+  /* Slide-in Animation */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Elements
+  const chatBtn = document.getElementById("supportx-chat-button");
+  const messageBox = document.getElementById("supportx-message-box");
+  const yesBtn = document.getElementById("supportx-yes");
+  const noBtn = document.getElementById("supportx-no");
+
+  // Show message box when chat button is clicked
+  chatBtn.addEventListener("click", () => {
+    messageBox.style.display = "block"; // Show message box near the bottom of the screen
+  });
+
+  // Close message box when 'No' button is clicked
+  noBtn.addEventListener("click", () => {
+    messageBox.style.display = "none";
+  });
+
+  // Redirect to Telegram with a message when 'Yes' button is clicked
+  yesBtn.addEventListener("click", () => {
+    window.open("https://t.me/SuportX_team_24?text=Hi!%20SupportXteam%20I%20need%20help", "_blank");
+    messageBox.style.display = "none";
+  });
+
+  // Optional: Close message box if clicked outside of the box
+  window.addEventListener("click", (e) => {
+    if (e.target === messageBox) {
+      messageBox.style.display = "none";
+    }
+  });
+</script>
