@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +6,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    /* (CSS কোড আগের মতোই থাকবে) */
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -117,78 +115,73 @@
 <body>
   <div class="payment-box">
     <img src="https://i.postimg.cc/Nfwb9bnw/1710850894.jpg" class="logo" alt="Logo" />
-    <h2>বিকাশ মার্চেন্ট পেমেন্ট</h2>
-    
-    <div class="info-section">
-      <div class="label">পেমেন্ট নাম্বার:</div>
-      <div id="paymentNumber">01318645435</div>
-      <button class="copy-btn" onclick="copyText('paymentNumber')">Copy</button>
-    </div>
+    <h2>বিকাশ মার্চেন্ট পেমেন্ট</h2><div class="info-section">
+  <div class="label">পেমেন্ট নাম্বার:</div>
+  <div id="paymentNumber">01318645435</div>
+  <button class="copy-btn" onclick="copyText('paymentNumber')">Copy</button>
+</div>
 
-    <div class="info-section">
-      <div class="label">টাকার পরিমাণ:</div>
-      <div id="paymentAmount">লোড হচ্ছে...</div>
-      <button class="copy-btn" onclick="copyText('paymentAmount')">Copy</button>
-    </div>
+<div class="info-section">
+  <div class="label">টাকার পরিমাণ:</div>
+  <div id="paymentAmount">লোড হচ্ছে...</div>
+  <button class="copy-btn" onclick="copyText('paymentAmount')">Copy</button>
+</div>
 
-    <div class="instructions">
-      *247# ডায়াল করে আপনার bKash মোবাইল মেনুতে যান অথবা bKash অ্যাপে যান।<br><br>
-      "Send Money" অপশন সিলেক্ট করুন।<br>
-      প্রাপক নম্বরঃ <strong>01318645435</strong><br>
-      পরিমাণঃ <strong id="amtText">লোড হচ্ছে...</strong><br>
-      আপনার পিন দিয়ে নিশ্চিত করুন।<br>
-      তারপর নিচে আপনার <strong>Transaction ID</strong> দিন এবং VERIFY ক্লিক করুন।
-    </div>
+<div class="instructions">
+  *247# ডায়াল করে আপনার bKash মোবাইল মেনুতে যান অথবা bKash অ্যাপে যান।<br><br>
+  "Send Money" অপশন সিলেক্ট করুন।<br>
+  প্রাপক নম্বরঃ <strong>01318645435</strong><br>
+  পরিমাণঃ <strong id="amtText">লোড হচ্ছে...</strong><br>
+  আপনার পিন দিয়ে নিশ্চিত করুন।<br>
+  তারপর নিচে আপনার <strong>Transaction ID</strong> দিন এবং VERIFY ক্লিক করুন।
+</div>
 
-    <input type="text" id="trxid" placeholder="Transaction ID দিন" />
-    <button class="verify" onclick="submitPayment()">VERIFY</button>
+<input type="text" id="trxid" placeholder="Transaction ID দিন" />
+<button class="verify" onclick="submitPayment()">VERIFY</button>
 
-    <div class="telegram-btn">
-      <a href="https://t.me/SuportX_team_24" target="_blank">
-        <span class="material-icons">send</span> টেলিগ্রামে মেসেজ দিন
-      </a>
-    </div>
+<div class="telegram-btn">
+  <a href="https://t.me/SuportX_team_24" target="_blank">
+    <span class="material-icons">send</span> টেলিগ্রামে মেসেজ দিন
+  </a>
+</div>
+
   </div>  
+<script>
+  window.onload = function () {
+    const savedAmount = localStorage.getItem('selectedAmount');
 
-  <script>
-    window.onload = function () {
-      const savedAmount = localStorage.getItem('selectedAmount'); // আপনি যদি sessionStorage ব্যবহার করতে চান, এটি sessionStorage.getItem('selectedAmount') হবে।
-      
-      // যদি savedAmount থাকে, তাহলে এমাউন্ট সঠিকভাবে লোড করুন
-      if (savedAmount) {
-        document.getElementById("paymentAmount").innerText = savedAmount;
-        document.getElementById("amtText").innerText = savedAmount;
-      } else {
-        document.getElementById("paymentAmount").innerText = 'প্যাকেজ সিলেক্ট করা হয়নি';
-        document.getElementById("amtText").innerText = 'N/A';
-      }
-    };
+    if (savedAmount) {
+      document.getElementById("paymentAmount").innerText = savedAmount;
+      document.getElementById("amtText").innerText = savedAmount;
+    } else {
+      document.getElementById("paymentAmount").innerText = 'প্যাকেজ সিলেক্ট করা হয়নি';
+      document.getElementById("amtText").innerText = 'N/A';
+    }
+  };
 
-    // টেক্সট কপি করার জন্য ফাংশন
-    function copyText(id) {
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text);
-      alert("Copied: " + text);
+  function copyText(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("Copied: " + text);
+  }
+
+  function submitPayment() {
+    const trx = document.getElementById("trxid").value.trim();
+    const lastTrx = sessionStorage.getItem("lastTrxID");
+
+    if (!trx) {
+      alert("Transaction ID দিন।");
+      return;
     }
 
-    // পেমেন্ট সাবমিট করার জন্য ফাংশন
-    function submitPayment() {
-      const trx = document.getElementById("trxid").value.trim();
-      const lastTrx = sessionStorage.getItem("lastTrxID");
-
-      if (!trx) {
-        alert("Transaction ID দিন।");
-        return;
-      }
-
-      if (trx === lastTrx) {
-        alert("একই ট্রানজেকশন দুইবার দেওয়া হয়েছে।\nআপনার একাউন্ট ব্লক হয়েছে।\n\nTelegram এ যোগাযোগ করুন: @SuportX_team_24");
-        return;
-      }
-
-      sessionStorage.setItem("lastTrxID", trx);
-      alert("পেমেন্ট তথ্য এখনো পাওয়া যায়নি। সঠিকভাবে পেমেন্ট করে আবার VERIFY করুন।");
+    if (trx === lastTrx) {
+      alert("একই ট্রানজেকশন দুইবার দেওয়া হয়েছে।\nআপনার একাউন্ট ব্লক হয়েছে।\n\nTelegram এ যোগাযোগ করুন: @SuportX_team_24");
+      return;
     }
-  </script>
+
+    sessionStorage.setItem("lastTrxID", trx);
+    alert("পেমেন্ট তথ্য এখনো পাওয়া যায়নি। সঠিকভাবে পেমেন্ট করে আবার VERIFY করুন।");
+  }
+</script>
 </body>
 </html>
