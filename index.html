@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TopUpBuzz - Premium</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f3f6fc, #e6ecff);
+      color: #222;
+      font-size: 16px;
+    }
+    header {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: 0.4s ease;
+    }
+    header img {
+      height: 40px;
+    }
+    .login-btn {
+      background: #fff;
+      color: #004080;
+      padding: 12px 25px;
+      border-radius: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: 0.4s ease;
+    }
+    .login-btn:hover {
+      background: #0056b3;
+      color: white;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+    .notice, .banner {
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+    .notice {
+      background: #f9c51b;
+      color: #222;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    .banner {
+      background: #1a2a6c;
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+    }
+    .slider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      max-height: 250px;
+      border-radius: 15px;
+    }
+    .slider img {
+      width: 100%;
+      display: none;
+      border-radius: 15px;
+      object-fit: cover;
+      filter: brightness(80%);
+    }
+    .slider img.active {
+      display: block;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+    .section {
+      padding: 30px 40px;
+      background: #ffffff;
+      margin: 20px 0;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #1a2a6c;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: 0.4s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 15px;
+    }
+    .card a {
+      display: block;
+      text-decoration: none;
+      font-weight: 600;
+      color: #333;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+    .card a:hover {
+      color: #0056b3;
+    }
+    .download-banner, .join-telegram {
+      margin: 25px 0;
+      background: linear-gradient(135deg, #ff007f, #ff8c00);
+      color: white;
+      padding: 18px 25px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: 0.4s ease;
+    }
+    .download-banner:hover, .join-telegram:hover {
+      background: linear-gradient(135deg, #ff8c00, #ff007f);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .footer {
+      background: #1e3c72;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    .social-icons i {
+      margin: 0 10px;
+      font-size: 24px;
+      color: #fff;
+      transition: 0.4s ease;
+    }
+    .social-icons i:hover {
+      color: #f9c51b;
+    }
+    @media screen and (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.postimg.cc/Nfwb9bnw/1710850894.jpg" alt="Logo">
+    <a href="signup.html" class="login-btn">Login</a>
+  </header>
+  <div class="notice">নোটিশ: এই সাইট শুধুমাত্র টপআপ এবং সোসাল সার্ভিস এর জন্য।</div>
+  <br>
+  <div class="slider">
+    <img src="https://i.postimg.cc/hGq7M39S/1744960785.jpg" class="active" alt="Slide 1">
+    <img src="https://i.postimg.cc/WznvLzyW/free-fire-diamond-top-up-bd.jpg" alt="Slide 2">
+    
+  </div>
+  
+  <div class="section">
+    <h2>Free Fire</h2>
+    <div class="grid">
+      <div class="card"><a href="topup.html"><img src="https://i.postimg.cc/J4psjzh5/1735123003.jpg"><a href="topup.html">TopUp</a></div>
+      <div class="card"><a href="evoaccess.html"><img src="https://i.postimg.cc/63bPdZDN/1735123076.png"><a href="evoaccess.html">EVO Access</a></div>
+      <div class="card"><a href="airdrip.html"><img src="https://i.postimg.cc/264Kt591/1735123177.jpg"><a href="airdrop.html">Airdrop</a></div>
+      <div class="card"><a href="weekly.html"><img src="https://i.postimg.cc/268Zsc2n/1735123209.jpg"><a href="weekly.html">Weekly Offer</a></div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>Social Media Service</h2>
+    <div class="grid">
+      <div class="card"><a href="fbserv.html"><img src="https://i.postimg.cc/xdqRHdVw/1741969269.jpg"><a href="fbserv.html">FB Likes</a></div>
+      <div class="card"><a href="tiktok.html"><img src="https://i.postimg.cc/d3Zp9BPK/1741969354.jpg"><a href="tiktok.html">TikTok Followers</a></div>
+      <div class="card"><a href="ytserv"><img src="https://i.postimg.cc/WzknfpNd/1741969429.jpg"><a href="ytserv.html">YouTube Views</a></div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>More Games</h2>
+    <div class="grid">
+      <div class="card"><a href="pubg.html" ><img src="https://i.postimg.cc/HxSRCL13/1736493511.jpg"><a href="pubg.html">PUBG Mobile</a></div>
+      <div class="card"><a href="fc.html" ><img src="https://i.postimg.cc/R0YpPD7b/1736493505.jpg"><a href="fc.html">FC Mobile</a></div>
+    </div>
+  </div>
+  <script>
+    let slides = document.querySelectorAll(".slider img");
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000);
+  </script>
+</body>
+</html>
+<div class="exclusive-container" style="max-width: 100%; padding: 15px; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;">
+
+  <!-- App Download (Compact) -->
+  <div style="background: linear-gradient(135deg, #4b2c91, #ff7f50); border-radius: 12px; padding: 15px; text-align: center; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 15px;">
+    <img src="https://i.postimg.cc/Nfwb9bnw/1710850894.jpg" alt="Download App" style="height: 85px; margin-bottom: 8px;">
+    <h3 style="font-size: 18px; margin: 8px 0;">Download Our App</h3>
+    <a href="#" style="background: white; color: #4b2c91; padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 6px; text-decoration: none;">Click Here</a>
+  </div>
+
+  <!-- Telegram Join (Compact) -->
+  <div style="background: #0088cc; border-radius: 12px; padding: 15px; text-align: center; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+    <img src="https://i.postimg.cc/W3DxmJyr/join-us-telegram-3d-telegram-logo-with-social-media-icon-telegram-square-banner-instagram-405041-389.jpg" alt="Join Telegram" style="height: 150px; margin-bottom: 8px;">
+    <h4 style="font-size: 16px; margin: 6px 0;">Join Telegram</h4>
+    <a href="#" style="display: inline-block; background: white; color: #0088cc; padding: 6px 12px; font-size: 14px; border-radius: 5px; text-decoration: none; font-weight: 600;">Join Now</a>
+  </div>
+
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Start: Premium Footer Section -->
+<footer style="background: linear-gradient(to right, #1e1e2f, #2d2d44); color: #fff; padding: 20px 15px; text-align: center; font-family: 'Segoe UI', sans-serif; border-top: 4px solid #ff7f50;">
+
+  <h2 style="font-size: 18px; margin-bottom: 10px;">TopUp Buzz</h2>
+  <p style="font-size: 14px; margin-bottom: 15px;">
+    House #80, Road #17, Nikunja-5, Dhaka
+  </p>
+
+  <!-- Social Icons -->
+  <div style="display: flex; justify-content: center; gap: 18px; font-size: 20px;">
+    <a href="#" style="color: #fff;"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" style="color: #fff;"><i class="fab fa-youtube"></i></a>
+    <a href="#" style="color: #fff;"><i class="fab fa-tiktok"></i></a>
+  </div>
+
+  <p style="font-size: 12px; margin-top: 20px; color: #aaa;">© 2025 TopUp Buzz. All rights reserved.</p>
+
+</footer>
+<!-- End: Premium Footer Section -->
