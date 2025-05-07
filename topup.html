@@ -256,7 +256,6 @@
   let selectedDiamonds = "";
   const selectionSummary = document.getElementById("selectionSummary");
 
-  // প্যাকেজ সিলেক্ট করার সময়
   function handlePackageSelect(amount, packageName) {
     const uid = document.getElementById("uid").value.trim();
     if (!uid) {
@@ -267,27 +266,34 @@
     selectedAmount = amount;
     selectedDiamonds = packageName;
 
-    // sessionStorage এ প্যাকেজের ডেটা সংরক্ষণ করা হচ্ছে
+    // sessionStorage এ সংরক্ষণ
     sessionStorage.setItem('topupAmount', amount);
     sessionStorage.setItem('userUID', uid);
-    sessionStorage.setItem('selectedDiamonds', selectedDiamonds);
+    sessionStorage.setItem('selectedDiamonds', packageName);
 
+    // UI তে দেখানো
     selectionSummary.innerText = `আপনি ${uid} আইডিতে ${selectedDiamonds} প্যাকেজ সিলেক্ট করেছেন যার দাম ${amount} টাকা।`;
   }
+function goToPayment(method) {
+  const uid = sessionStorage.getItem('userUID');
+  const amount = sessionStorage.getItem('topupAmount');
+  const packageName = sessionStorage.getItem('selectedDiamonds');
 
-  // পেমেন্ট পেজে যাওয়ার সময়
-  function goToPayment(method) {
-    const uid = sessionStorage.getItem('userUID');
-    const amount = sessionStorage.getItem('topupAmount');
-
-    if (!uid || !amount) {
-      alert("দয়া করে UID লিখুন ও প্যাকেজ সিলেক্ট করুন।");
-      return;
-    }
-
-    // পরবর্তী পেজে রিডাইরেক্ট করা হচ্ছে
-    window.location.href = method + '.html';
+  if (!uid || !amount || !packageName) {
+    alert("দয়া করে UID লিখুন ও প্যাকেজ সিলেক্ট করুন।");
+    return;
   }
+
+  // localStorage-এ এমাউন্ট সেভ করা
+  localStorage.setItem('selectedAmount', amount);
+
+  // পেমেন্ট পেজে পাঠানো
+  if (method === "bkash") {
+    window.location.href = "bkash.html";
+  } else if (method === "nagad") {
+    window.location.href = "nagad.html";
+  }
+}
 </script>
   
 </body>
