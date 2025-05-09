@@ -4,6 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TopUpBuzz - থেকে ডায়মন্ড টপ আপ করুন কম দামে এবং সবচেয়ে দ্রুত ! Weekly & Monthly স্পেশাল অফার Weekly ৳119 এবং Monthly ৳650 💎🎉</title>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "b38c4417-71ce-4740-81a8-d3e5c5080016",
+      notifyButton: {
+        enable: true,
+        position: 'bottom-right',
+        size: 'large',
+        theme: 'default',
+        text: {
+          'tip.state.unsubscribed': 'নোটিফিকেশন চালু করতে ক্লিক করুন!',
+          'tip.state.subscribed': 'আপনি সাবস্ক্রাইব করেছেন!',
+          'message.prenotify': 'নোটিফিকেশন পেতে সাবস্ক্রাইব করুন!',
+        },
+      },
+      promptOptions: {
+        slidedown: {
+          enabled: true,
+          autoPrompt: true,
+          actionMessage: "আপনি কি আমাদের কাছ থেকে আপডেট পেতে চান?",
+          acceptButtonText: "হ্যাঁ",
+          cancelButtonText: "না",
+        }
+      }
+    });
+  });
+</script>
   <!-- Standard favicon -->
   <link rel="icon" type="image/jpeg" sizes="32x32" href="https://i.postimg.cc/qqdbvzgP/20250508-082306.png">
 
